@@ -1,0 +1,30 @@
+#PRE-REQUISITE
+1. NODE JS
+2. npm i -D @playwright/test
+3. npx playwright install
+
+
+#USEFUL COMMANDS
+1. npx playwright test 
+    *run all tests
+
+2. npx playwright test --grep @grepit
+    *run specific test using grep
+
+3. npx playwright test --headed
+    *headed run. --headless for headless
+
+4. npx playwright test --browser=all
+    *run to all browsers
+
+5. npx playwright test --debug
+    *with debuging
+
+
+
+#createIt-framework can't be used at this time. It is written in protractor, with Jasmine-spec reporter
+#createIt-utility can still be use, but playwright has auto-waiting feature so no need for createIt-utility
+#
+
+
+

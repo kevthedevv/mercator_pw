@@ -1,0 +1,54 @@
+{
+  "users" : {
+    "customer" : {
+      "domesticCustomer" : {
+        "credentials" : {
+          "email"       : "mercator_dev@createit.com",
+          "password"    : "P@ssw0rd",
+          "type"        : "Domestic",
+          "name"        : "Teo Spółka Z Ograniczoną Odpowiedzialnością Spółka Komandytowa",
+          "creditLimit" : "Yes",
+          "taxID"       : "7773221095"
+        }
+      },
+      "exportCustomer" : {
+        "credentials" : {
+          "email"       : "mercator_dev_exp@createit.com",
+          "password"    : "P@ssw0rd",
+          "type"        : "Export",
+          "name"        : "OÜ KULUKAUBANDUS",
+          "creditLimit" : "Yes",
+          "taxID"       : "EE 101279293"
+        }
+      }
+    } 
+  },
+  "language":{
+    "english" : {
+        "productCatalog" : "Product catalog",
+        "yourCart" : "YOUR CART",
+        "addressData" : "ADDRESS DATA",
+        "summary": "SUMMARY",
+        "thankYouMessage": "Thank you for your order. You can find its details below",
+        "ownCollection" : "Own collection",
+        "courier" : "Courier",
+        "creditLimit": "Credit limit",
+        "proforma": "Proforma",
+        "blueMedia": "Blue Media",
+        "cashOnDelivery": "Cash on delivery"
+    },
+    "polish" :{
+        "productCatalog" : "Katalog Produktów",
+        "yourCart" : "TWÓJ KOSZYK",
+        "addressData" : "DANE ADRESOWE",
+        "summary": "PODSUMOWANIE",
+        "thankYouMessage": "Dziękujemy za złożenie zamówienia. Jego szczegóły znajdziesz poniżej",
+        "ownCollection" : "Odbiór własny",
+        "courier" : "Kurier",
+        "creditLimit": "Limit kredytowy",
+        "proforma": "Proforma",
+        "blueMedia": "Blue Media",
+        "cashOnDelivery": "Za pobraniem"
+    }
+  }
+}

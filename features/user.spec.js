@@ -39,28 +39,52 @@ test.describe.serial('Domestic customer Own collection + Credit limit @C1710@', 
       await customerDomestic.isAlertDisplay(page)
     });  
 
-    // test('', async () => {
-    //   await customerDomestic.productTabClick(page)
-    // });  
+    test('When user click cart', async () => {
+      await customerDomestic.goToCart(page)
+    });  
 
-    // test('', async () => {
-    //   await customerDomestic.productTabClick(page)
-    // });  
+    test('Then your cart page display', async () => {
+      await customerDomestic.yourCartPageDisplay(page)
+    });  
 
-    // test('', async () => {
-    //   await customerDomestic.productTabClick(page)
-    // });  
+    test('When user select Own Collection and Credit Limit', async () => {
+      await customerDomestic.selectMethod(deliveryType, paymentType, page)
+    });  
 
-    // test('', async () => {
-    //   await customerDomestic.productTabClick(page)
-    // });  
+    test('And user click continue on to the address details', async () => {
+      await customerDomestic.clickContinue(page)
+    });  
 
-    // test('', async () => {
-    //   await customerDomestic.productTabClick(page)
-    // });  
+    test('Then invoice address page display', async () => {
+      await customerDomestic.addressPageDisplay(page)
+    });  
 
-    // test('', async () => {
-    //   await customerDomestic.productTabClick(page)
-    // });  
+    test('And accept Terms & Condition and Consent', async () => {
+      await customerDomestic.checkConsent(page)
+    });  
+
+    test('When user select Ill give it later', async () => {
+      await customerDomestic.collectionLater(page)
+    });  
+
+    test('And user click summary and payment', async () => {
+      await customerDomestic.summaryAndPayment(page)
+    });  
+
+    test('Then summary page display', async () => {
+      await customerDomestic.summaryPageDisplay(page)
+    });  
+
+    test('When user click I order with an obligation to pay', async () => {
+      await customerDomestic.clickOrderButton(page)
+    });  
+
+    test('And Thank you message display', async () => {
+      await customerDomestic.thankYouDisplayMsg(page)
+    }); 
+
+    test('Then Payment and Collection type is correct', async () => {
+      await customerDomestic.summaryMethod(deliveryType, paymentType, page)
+    });  
 });
   

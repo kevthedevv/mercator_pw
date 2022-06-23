@@ -10,6 +10,12 @@ class CommonPage {
         await page.goto('https://dev.mercator.createit.dev')
     }
 
+    delay(time) {
+        return new Promise(function(resolve) { 
+            setTimeout(resolve, time)
+        });
+     }
+
     async login( page, domesticUser) {
         await this.inputEmail( page, domesticUser.credentials.email );
         await this.inputPassword(page, domesticUser.credentials.password );
@@ -67,6 +73,7 @@ class CommonPage {
     }
 
     async productTabClick(page) {
+        this.isLoaderInvisible(page)
         const element = commonEl.productTab();
         await page.evaluate((el) => document.querySelector(el).click(), element)
     }
@@ -80,15 +87,190 @@ class CommonPage {
     }
 
     async clickAddToCart(page) {
-        await page.click('a:has-text("ideall cotton")');
-        await page.click('button:has-text("Add to cart")');
+        this.isLoaderInvisible(page);
+        await page.waitForTimeout(8000)
+        const element = commonEl.addToCart();
+        await page.locator(element).click();
+        
     }
 
     async alertDialogDisplay() {
         const element = commonEl.alertDialogDisplay();
+        await page.waitForSelector(element);
         await expect(page.locator(element)).toHaveCount(1)
     }
 
+    async closeHelloBar() {
+        const element = commonEl.helloBar();
+        await page.locator(element).click();
+    }
+
+    async goToCart(page) {
+        const element = commonEl.goToCart();
+        await page.waitForSelector(element)
+        await page.locator(element).click();
+    }
+
+    async checkPage(title, page) {
+        this.isLoaderInvisible(page);
+        const yourCart = commonEl.yourCart();
+        const addressPage = commonEl.addessPage();
+        const summary = commonEl.summaryPage();
+        const dataYourCart = userJSON.language.english.yourCart;
+        const dataAddressData = userJSON.language.english.addressData;
+        const dataSummary = userJSON.language.english.summary;
+  
+        await page.waitForSelector(commonEl.progressTitle())
+
+        switch(title) {
+            case 'Your Cart':
+                await page.waitForSelector(yourCart)
+                await expect(page.locator(yourCart)).toHaveText(dataYourCart)
+                break;
+            case 'Address Data':
+                await expect(page.locator(addressPage)).toHaveText(dataAddressData)
+                break;
+            case 'Summary':
+                await expect(page.locator(summary)).toHaveText(dataSummary)
+                break;
+        }
+    }
+
+    async deliveryMethod(delivery, page) {
+        this.isLoaderInvisible(page)
+        const collection = commonEl.ownCollection();
+        const courier = commonEl.courier();
+        switch(delivery){
+            case 'Own Collection':
+                await page.locator(collection).click();
+                break;
+            case 'Courier':
+                await page.locator(courier).click();
+                break;
+        }
+    }
+
+    async paymentMethod(payment, delivery, page) {
+        this.isLoaderInvisible(page)
+        const creditLimit = commonEl.creditLimit();
+        const proforma = commonEl.proforma();
+        const cashOnDelivery = commonEl.cashOnDelivery();
+        const blueMediaCourier = commonEl.blueMediaCourier();
+        const blueMediaCollect = commonEl.blueMediaCollect();
+
+        switch (payment){
+            case 'Credit Limit':
+                await page.locator(creditLimit).click();
+                break;
+            case 'Proforma':
+                await page.locator(proforma).click();
+                break;
+            case 'Cash On Delivery':
+                await page.locator(cashOnDelivery).click();
+                break;
+            case 'Blue Media':
+                if(delivery === 'Courier'){
+                    await page.locator(blueMediaCourier).click();
+                }else{
+                    await page.locator(blueMediaCollect).click();
+                }
+                break;       
+        }
+        this.isLoaderInvisible(page)
+    }
+
+    async clickContinue(page) {
+        const element = commonEl.clickContinue();
+        await page.locator(element).click();
+        this.isLoaderInvisible(page);
+    }
+
+    async clickSummaryAndPayment(page) {
+        this.isLoaderInvisible(page);
+        const element = commonEl.clickSummaryAndPayment();
+        await page.locator(element).click();
+        this.isLoaderInvisible(page);
+    }
+
+    async collectionMethod(page, method) {
+      
+        const collectSelectDriver = commonEl.collectSelectDriver();
+        const collectLater = commonEl.collectLater();
+        switch (method) {
+            case 'Provide Now':
+                await page.locator(collectSelectDriver).click();
+                break;
+            case 'Provide Later':
+                await page.locator(collectLater).click();
+                break;
+        }
+    }
+
+    async checkConsent(page){
+        const termsAndCondition = commonEl.termsAndCondition();
+        const consent = commonEl.consent();
+        await page.locator(termsAndCondition).click();
+        await page.locator(consent).click();
+    }
+
+    async clickOrderButton(page) {
+        this.isLoaderInvisible(page);
+        const element = commonEl.orderButton();
+        await page.locator(element).click();
+        this.isLoaderInvisible(page);
+    }
+
+    async thankYouDisplayMsg(){
+        const dataThankYouMessage = userJSON.language.english.thankYouMessage;
+        const element = commonEl.thankYouMessage();
+        await expect(page.locator(element)).toHaveText(dataThankYouMessage)
+    }
+
+    async orderSummaryPayment(payment, page) {
+        this.isLoaderInvisible(page)
+        const dataCreditLimit = userJSON.language.english.creditLimit;
+        const dataProforma = userJSON.language.english.proforma;
+        const dataCashOnDelivery = userJSON.language.english.cashOnDelivery;
+        const dataBlueMedia = userJSON.language.english.blueMedia;
+        const paymentMethod = commonEl.paymentMethod();
+        switch (payment) {
+            case 'Credit Limit':
+                await expect(page.locator(paymentMethod)).toHaveText(dataCreditLimit)
+                break;
+            case 'Proforma':
+                await expect(page.locator(paymentMethod)).toHaveText(dataProforma)
+                break;
+            case 'Cash On Delivery':
+                await expect(page.locator(paymentMethod)).toHaveText(dataCashOnDelivery)
+                break;
+            case 'Blue Media':
+                await expect(page.locator(paymentMethod)).toHaveText(dataBlueMedia)
+                break;        
+        }
+    }
+
+    async orderSummaryDelivery(delivery, page) {
+        const orderSummaryDelivery = commonEl.orderSummaryDelivery();
+        const dataOwnCollection = userJSON.language.english.ownCollection;
+        const dataCourier = userJSON.language.english.courier;
+
+        switch (delivery){
+            case 'Own Collection':
+                await expect(page.locator(orderSummaryDelivery)).toHaveText(dataOwnCollection)
+                break;
+            case 'Courier':
+                await expect(page.locator(orderSummaryDelivery)).toHaveText(dataCourier)
+                break;
+        }
+           
+    }
+
+
 }
 
+  
+
 module.exports = new CommonPage;
+
+// await page.click('a:has-text("ideall cotton")');
+// await page.click('button:has-text("Add to cart")');

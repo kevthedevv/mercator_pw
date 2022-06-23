@@ -26,9 +26,9 @@
   "language":{
     "english" : {
         "productCatalog" : "Product catalog",
-        "yourCart" : "YOUR CART",
-        "addressData" : "ADDRESS DATA",
-        "summary": "SUMMARY",
+        "yourCart" : "Your cart",
+        "addressData" : "Address data",
+        "summary": "Summary",
         "thankYouMessage": "Thank you for your order. You can find its details below",
         "ownCollection" : "Own collection",
         "courier" : "Courier",

@@ -2,6 +2,7 @@
   "dependencies": {
     "@auth0/s3": "^1.0.0",
     "@cucumber/cucumber": "^8.0.0-rc.1",
+    "colors": "^1.4.0",
     "createit-framework": "git+https://gitlab+deploy-token-3:TPSBqCrC71WEc5iN9_mF@gitlab.createit.pl/automatedqa/framework.git",
     "createit-qa-utility": "git+https://gitlab+deploy-token-16:6Cuyzr2TscS7Ax77RKt_@gitlab.createit.pl/automatedqa/createit-qa-utility.git",
     "jasmine": "^2.8.0",

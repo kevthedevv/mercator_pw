@@ -128,9 +128,11 @@ class CommonPage {
                 await expect(page.locator(yourCart)).toHaveText(dataYourCart)
                 break;
             case 'Address Data':
+                await page.waitForSelector(addressPage);
                 await expect(page.locator(addressPage)).toHaveText(dataAddressData)
                 break;
             case 'Summary':
+                await page.waitForSelector(summary);
                 await expect(page.locator(summary)).toHaveText(dataSummary)
                 break;
         }
@@ -160,18 +162,23 @@ class CommonPage {
 
         switch (payment){
             case 'Credit Limit':
+                await page.waitForSelector(creditLimit);
                 await page.locator(creditLimit).click();
                 break;
             case 'Proforma':
+                await page.waitForSelector(proforma);
                 await page.locator(proforma).click();
                 break;
             case 'Cash On Delivery':
+                await page.waitForSelector(cashOnDelivery);
                 await page.locator(cashOnDelivery).click();
                 break;
             case 'Blue Media':
                 if(delivery === 'Courier'){
+                    await page.waitForSelector(blueMediaCourier);
                     await page.locator(blueMediaCourier).click();
                 }else{
+                    await page.waitForSelector(blueMediaCollect);
                     await page.locator(blueMediaCollect).click();
                 }
                 break;       
@@ -195,7 +202,7 @@ class CommonPage {
     async collectionMethod(page, method) {
       
         const collectSelectDriver = commonEl.collectSelectDriver();
-        const collectLater = commonEl.collectLater();
+         const collectLater = commonEl.collectLater();
         switch (method) {
             case 'Provide Now':
                 await page.locator(collectSelectDriver).click();
@@ -221,7 +228,7 @@ class CommonPage {
     }
 
     async thankYouDisplayMsg(){
-        const dataThankYouMessage = userJSON.language.english.thankYouMessage;
+        const dataThankYouMessage = userJSON.language.english.thankYouMessages;
         const element = commonEl.thankYouMessage();
         await expect(page.locator(element)).toHaveText(dataThankYouMessage)
     }
@@ -233,6 +240,7 @@ class CommonPage {
         const dataCashOnDelivery = userJSON.language.english.cashOnDelivery;
         const dataBlueMedia = userJSON.language.english.blueMedia;
         const paymentMethod = commonEl.paymentMethod();
+        await page.waitForSelector(paymentMethod);
         switch (payment) {
             case 'Credit Limit':
                 await expect(page.locator(paymentMethod)).toHaveText(dataCreditLimit)
@@ -253,7 +261,7 @@ class CommonPage {
         const orderSummaryDelivery = commonEl.orderSummaryDelivery();
         const dataOwnCollection = userJSON.language.english.ownCollection;
         const dataCourier = userJSON.language.english.courier;
-
+        await page.waitForSelector(orderSummaryDelivery);       
         switch (delivery){
             case 'Own Collection':
                 await expect(page.locator(orderSummaryDelivery)).toHaveText(dataOwnCollection)
@@ -267,8 +275,6 @@ class CommonPage {
 
 
 }
-
-  
 
 module.exports = new CommonPage;
 

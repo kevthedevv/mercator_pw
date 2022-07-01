@@ -21,6 +21,9 @@
     *with debuging
 
 
+#GLOBAL CONFIGURATION TIPS
+https://playwright.dev/docs/test-configuration#global-configuration
+
 
 #createIt-framework can't be used at this time. It is written in protractor, with Jasmine-spec reporter
 #createIt-utility can still be use, but playwright has auto-waiting feature so no need for createIt-utility

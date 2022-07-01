@@ -7,7 +7,7 @@ const userJSON     = require( './../data/data' );
 class CommonPage {
   
     async goToPage(page) {
-        await page.goto('https://dev.mercator.createit.dev')
+        await page.goto('/')
     }
 
     delay(time) {
